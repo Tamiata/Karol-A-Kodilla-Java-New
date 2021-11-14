@@ -58,8 +58,7 @@ class KodillaSpringApplicationTests {
     @Test
     void testShapeLoadedIntoContainer() {
         //Given
-        ApplicationContext context =
-                new AnnotationConfigApplicationContext("com.kodilla.spring");
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
         Shape shape = (Shape)context.getBean("chosenShape");
 
         //When
@@ -67,5 +66,6 @@ class KodillaSpringApplicationTests {
 
         //Then
         System.out.println("Chosen shape says: " + name);
+
     }
 }
