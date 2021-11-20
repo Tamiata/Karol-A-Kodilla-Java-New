@@ -23,8 +23,8 @@ public final class Task {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Task task = (Task) o;
-        return Objects.equals(name, task.name);
+        Task task = (Task) o; //rzutowanie
+        return Objects.equals(name, task.name);// defi
     }
 
     @Override
