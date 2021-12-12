@@ -7,10 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
 @Transactional
 @Repository
 public interface ProductDao extends CrudRepository<Product, Integer> {
 
-    List<Product> findById(int id);
     List<Product> findByName(String name);
+    List<Product> findAll();
 }
