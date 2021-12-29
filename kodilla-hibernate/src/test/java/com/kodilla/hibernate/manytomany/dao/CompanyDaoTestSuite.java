@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 @SpringBootTest
@@ -14,6 +17,9 @@ public class CompanyDaoTestSuite {
 
     @Autowired
     private CompanyDao companyDao;
+
+    @Autowired
+    private EmployeeDao employeeDao;
 
     @Test
     void testSaveManyToMany() {
@@ -52,12 +58,42 @@ public class CompanyDaoTestSuite {
         assertNotEquals(0, greyMatterId);
 
         //CleanUp
-        //try {
-        //    companyDao.deleteById(softwareMachineId);
-        //    companyDao.deleteById(dataMaestersId);
-        //    companyDao.deleteById(greyMatterId);
-        //} catch (Exception e) {
-        //    //do nothing
-        //}
+        try {
+            companyDao.deleteById(softwareMachineId);
+            companyDao.deleteById(dataMaestersId);
+            companyDao.deleteById(greyMatterId);
+        } catch (Exception e) {
+            //do nothing
+        }
     }
+
+    @Test
+    void testNamedQuerriesLastname() {
+
+        Employee johnSmith = new Employee("John", "Smith");
+        Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
+        Employee lindaKovalsky = new Employee("Linda", "Kovalsky");
+        Employee martinSmith = new Employee("Martin", "Smith");
+
+        employeeDao.save(johnSmith);
+        employeeDao.save(stephanieClarckson);
+        employeeDao.save(lindaKovalsky);
+        employeeDao.save(martinSmith);
+
+        List<Employee> smiths = employeeDao.retrieveEmployeeName("Smith");
+
+        assertEquals(2, smiths.size());
+
+        int johnSmithId = johnSmith.getId();
+        int stephanieClarcksonId = stephanieClarckson.getId();
+        int lindaKovalskyId = lindaKovalsky.getId();
+        int martinSmithId = martinSmith.getId();
+
+        employeeDao.deleteById(johnSmithId);
+        employeeDao.deleteById(stephanieClarcksonId);
+        employeeDao.deleteById(lindaKovalskyId);
+        employeeDao.deleteById(martinSmithId);
+
+    }
+
 }

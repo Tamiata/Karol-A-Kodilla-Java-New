@@ -5,6 +5,9 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+
 @Entity
 @Table(name = "COMPANY")
 public class Company {
